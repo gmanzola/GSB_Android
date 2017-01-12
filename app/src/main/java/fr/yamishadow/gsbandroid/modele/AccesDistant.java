@@ -14,13 +14,10 @@ import fr.yamishadow.gsbandroid.outils.AsyncResponse;
 
 public class AccesDistant implements AsyncResponse {
 
-    String SERVERADRR = "http://192.168.43.247/GSB/serveurGsb.php";
-    //private Controle controle;
-    private String[] tabMessage = {"enreg","auth","suppr"};
+    String SERVERADRR = "http://*** A DEFINIR ***/GSB/serveurGsb.php";
+    private String[] tabMessage = {"enreg","auth"};
 
     public AccesDistant(){
-
-        //controle = Controle.getInstance(null);
     }
 
     @Override
@@ -29,14 +26,22 @@ public class AccesDistant implements AsyncResponse {
         String[] message = output.split("%");
         if(message.length > 1) {
             // si taille du message superieur a 1
-            if (tabMessage[2].equals(message[0])){
+            if (tabMessage[1].equals(message[0])){
                 Log.d("AUTHENTIFICATION", "*****" + message[0]);
+
+                //action a realiser si le message contient auth
             }
-            else {
+            else if(tabMessage[0].equals(message[0])) {
                 // si tab message n'est pas egal a message de 0
                 Log.d("ELSE AUTHENTIFICATION", "****** tab=" + tabMessage[2] + " ******* message=" + message[0]);
             }
+            else{
+                Log.d("ELSE MESSAGE CONTIENT", "*****" + message[0]);
+            }
 
+        }
+        else{
+            Log.d("MESSAGE < 1", "*****" + message);
         }
     }
 
